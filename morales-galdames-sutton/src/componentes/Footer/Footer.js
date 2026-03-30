@@ -1,7 +1,12 @@
-import React from "react";
 
 function Footer(){
-    return(<></>)
+    return(
+        <>
+        <p>Paula Morales</p>
+        <p>Bernardita Galdames</p>
+        <p>Iosef Sutton</p>
+        </>
+    )
 }
 
 export default Footer

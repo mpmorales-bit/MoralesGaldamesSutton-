@@ -1,5 +1,6 @@
-import React, { Component } from "react"
-import Popular from "../Popular/Popular";
+import { Component } from "react"
+import { withRouter} from 'react-router-dom'
+import Peliculas from "../Peliculas/Peliculas";
 
 class SeccionPopulares extends Component{
     constructor(){
@@ -20,9 +21,9 @@ class SeccionPopulares extends Component{
         return(
         <>
         <section className="row cards" id="movies">
-            {populares.filter((movie, idx) => idx < 4).map((pelicula, idx) => (
-            <Popular key={pelicula + idx} 
-                        src={pelicula.poster_path} 
+            {populares.filter((pelicula, idx) => idx < 4).map((pelicula, idx) => (
+            <Peliculas key={pelicula + idx} 
+                        src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path} 
                         name={pelicula.title} 
                         description={pelicula.overview} 
                         detalle={pelicula.id} />
@@ -33,4 +34,4 @@ class SeccionPopulares extends Component{
     }
 }
 
-export default SeccionPopulares
+export default withRouter(SeccionPopulares)

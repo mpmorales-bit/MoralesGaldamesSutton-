@@ -10,6 +10,7 @@ import Favoritos from "./screens/Favoritos/Favoritos";
 import Login from "./screens/Login/Login";
 import Populares from "./components/Populares/Populares";
 import Toprateds from "./components/TopRateds/TopRateds";
+import DetalleDePelicula from "./components/DetalleDePelicula/DetalleDePelicula";
 
 
 function App() {
@@ -23,7 +24,8 @@ return(
         <Route path="/CrearCuenta" component={CrearCuenta}/>
         <Route path="/Populares" component={Populares}/>
         <Route path="/Toprated" component={Toprateds}/>
-        <Route path="/Resultados/:busqueda" component={Resultados}/>
+        <Route path="/resultados/:busqueda" component={Resultados}/>
+        <Route path="/detalles/:id" component={DetalleDePelicula}/>
     </Switch>
     <Footer/>
     </>

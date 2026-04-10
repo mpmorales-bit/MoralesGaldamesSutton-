@@ -1,6 +1,6 @@
 import { Component } from "react"
 import { withRouter} from 'react-router-dom'
-import TopRated from "../TopRated/TopRated";
+import Peliculas from "../Peliculas/Peliculas";
 
 class SeccionTopRated extends Component{
     constructor(){
@@ -14,16 +14,16 @@ class SeccionTopRated extends Component{
         .then( data => this.setState({movies: data.results}) )
         .catch( error => console.log(error))
     }
-
+    
     render(){
         const topRated = this.state.movies
 
         return(
         <>
         <section className="row cards" id="movies">
-            {topRated.filter((movie, idx) => idx < 4).map((pelicula, idx) => 
-            <TopRated key={pelicula + idx} 
-                        src={pelicula.poster_path} 
+            {topRated.filter((pelicula, idx) => idx < 4).map((pelicula, idx) => 
+            <Peliculas key={pelicula + idx} 
+                        src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path} 
                         name={pelicula.title} 
                         description={pelicula.overview} 
                         detalle={pelicula.id} />

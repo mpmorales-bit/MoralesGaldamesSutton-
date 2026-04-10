@@ -1,4 +1,5 @@
 import { Component } from 'react'
+import Peliculas from '../Peliculas/Peliculas';
 
 class Populares extends Component{
     constructor(){
@@ -31,11 +32,11 @@ class Populares extends Component{
         )
     }
 
-    return(){
+    render(){
         const peliculas = this.state.movies
         const peliculasFiltradas = this.filtrarPeliculas(this.state.busqueda)
 
-        render(
+        return(
             <>
             <form onSubmit={(e) => this.evitarSubmit(e)}>
                 <label>Buscador</label>
@@ -43,14 +44,12 @@ class Populares extends Component{
             </form>
             <section className='cardContainer'>
                 {
-                peliculasFiltradas.map((peliculas, idx) => (
-                    <RMcard key={peliculas + idx} 
-                        src={peliculas.image} 
-                        name={peliculas.name} 
-                        status={peliculas.status}
-                        species={peliculas.species}
-                        origin={peliculas.origin.name}
-                        id={peliculas.id}/>
+                peliculasFiltradas.map((pelicula, idx) => (
+                    <Peliculas key={pelicula + idx} 
+                        src={pelicula.poster_path} 
+                        name={pelicula.title} 
+                        description={pelicula.overview} 
+                        detalle={pelicula.id} />
                     ))}
             </section>
             <button >Cargar mas</button>
@@ -58,3 +57,5 @@ class Populares extends Component{
         )
     }
 }
+
+export default Populares

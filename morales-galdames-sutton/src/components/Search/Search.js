@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import { Component } from "react"
 import { withRouter } from 'react-router-dom'
 
 class Search extends Component{
@@ -18,8 +18,8 @@ class Search extends Component{
         this.setState({busqueda: e.target.value})
     }
 
-    return(){
-        render(
+    render(){
+        return(
             <>
                 <form onSubmit={(e) => this.evitarSubmit(e)}>
                     <input type="text" onChange={(e) => this.controlarCambios(e)} value={this.state.busqueda} placeholder="Buscar películas..."/>
@@ -27,5 +27,5 @@ class Search extends Component{
             </>
         )
     }
-}
+}   
 export default withRouter(Search)

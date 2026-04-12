@@ -1,10 +1,11 @@
+import React from "react";
 
-function Header(){
-    return(
-    <>
-    <h1>Hola</h1>
-    </>
-)
+function Header() {
+  return (
+    <header>
+      <p>Header</p>
+    </header>
+  );
 }
 
-export default Header
+export default Header;

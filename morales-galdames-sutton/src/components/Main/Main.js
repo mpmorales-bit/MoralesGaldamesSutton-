@@ -1,4 +1,4 @@
-import Search from "../Search/Search";
+import Search from "../../screens/Search/Search";
 import SeccionPopulares from "../SeccionPopulares/SeccionPopulares";
 import SeccionTopRated from "../SeccionTopRated/SeccionTopRated";
 import "./styles.css"

@@ -12,16 +12,17 @@ class CrearCuenta extends Component{
 
     enviarFormulario(event) {
         event.preventDefault();
+        
+        if (this.state.password.length < 6) {
+            this.setState({
+                error: alert("La contraseña debe tener mínimo 6 caracteres")
+            });
+            return;
+        }
 
         let guardarUsuarios = localStorage.getItem("usuarios");
         let usuarios = guardarUsuarios === null ? [] : JSON.parse(guardarUsuarios);
         
-        if (this.state.password.length < 6) {
-            this.setState({
-                error: "La contraseña debe tener mínimo 6 caracteres"
-            });
-            return;
-        }
 
         let emails = usuarios.map((usuario) => usuario.email);
 
@@ -34,7 +35,7 @@ class CrearCuenta extends Component{
 
         if (mailExistente) {
             this.setState ({ 
-                error : "El email ya está registrado"
+                error : alert("El email ya está registrado")
             });
             return;
         }
@@ -52,8 +53,8 @@ class CrearCuenta extends Component{
             password:"",
             error : ""
         });
-
-        alert ("La cuenta fue creada correctamente");
+        
+        this.props.history.push("/login")
     }
 
         controlarMail(event){

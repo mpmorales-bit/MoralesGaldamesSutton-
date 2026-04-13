@@ -15,7 +15,7 @@ class CrearCuenta extends Component{
         
         if (this.state.password.length < 6) {
             this.setState({
-                error: alert("La contraseña debe tener mínimo 6 caracteres")
+                error: "La contraseña debe tener mínimo 6 caracteres"
             });
             return;
         }
@@ -35,7 +35,7 @@ class CrearCuenta extends Component{
 
         if (mailExistente) {
             this.setState ({ 
-                error : alert("El email ya está registrado")
+                error : "El email ya está registrado"
             });
             return;
         }
@@ -53,7 +53,7 @@ class CrearCuenta extends Component{
             password:"",
             error : ""
         });
-        
+
         this.props.history.push("/login")
     }
 

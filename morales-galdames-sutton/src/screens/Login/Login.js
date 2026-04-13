@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 class Login extends Component {
 
@@ -42,6 +45,8 @@ class Login extends Component {
       });
       return;
     }
+
+    cookies.set("user-auth-cookie", this.state.email);
 
     this.setState({
       email: "",

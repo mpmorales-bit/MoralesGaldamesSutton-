@@ -38,13 +38,6 @@ function Header() {
             </li>
           ) : null}
 
-          <li>
-            <Link to="/Populares">Ver todas Populares</Link>
-          </li>
-
-          <li>
-            <Link to="/Toprated">Ver todas Top Rated</Link>
-          </li>
         </ul>
       </nav>
     </header>

@@ -2,7 +2,7 @@ import React from "react";
 import { Switch, Route } from 'react-router-dom'
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import CrearCuenta from "./components/CrearCuenta/CrearCuenta";
+import CrearCuenta from "./screens/CrearCuenta/CrearCuenta";
 import Resultados from "./components/Resultados/Resultados";
 import Home from "./screens/Home/Home";
 import Favoritos from "./screens/Favoritos/Favoritos";

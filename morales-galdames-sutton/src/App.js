@@ -10,7 +10,7 @@ import Login from "./screens/Login/Login";
 import Populares from "./components/Populares/Populares";
 import Toprateds from "./components/TopRateds/TopRateds";
 import DetalleDePelicula from "./screens/DetalleDePelicula/DetalleDePelicula";
-
+import "./App.css";
 
 function App() {
 return(

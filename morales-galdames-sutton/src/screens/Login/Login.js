@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
+import "./Login.css";
 
 const cookies = new Cookies();
 
@@ -59,28 +60,27 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
-        <h2>Login</h2>
+      <div className="login-container">
+        <div className="login-box">
+          <h2 className="login-title">Login</h2>
 
-        <form onSubmit={(event) => this.iniciarSesion(event)}>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={this.state.email}
-            onChange={(event) => this.controlarEmail(event)}
-          />
+          <form className="login-form" onSubmit={(event) => this.iniciarSesion(event)}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={this.state.email}
+              onChange={(event) => this.controlarEmail(event)}/>
 
-          <label>Password:</label>
-          <input
-            type="password"
-            value={this.state.password}
-            onChange={(event) => this.controlarPassword(event)}
-          />
+            <label>Password:</label>
+            <input
+              type="password"
+              value={this.state.password}
+              onChange={(event) => this.controlarPassword(event)}/>
 
-          <button type="submit">Iniciar sesión</button>
-        </form>
-
-        {this.state.error !== "" ? <p>{this.state.error}</p> : null}
+            <button type="submit">Iniciar sesión</button>
+          </form>
+          {this.state.error !== "" ? (<p className="login-error">{this.state.error}</p>) : null}
+        </div>
       </div>
     );
   }

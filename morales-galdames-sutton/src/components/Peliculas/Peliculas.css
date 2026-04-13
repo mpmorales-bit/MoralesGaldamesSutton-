@@ -1,0 +1,19 @@
+.card-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.btn-detalle {
+    background-color: #eceeec;
+    color: rgb(245, 241, 241);
+    padding: 8px;
+    margin-right: 5px;
+    text-decoration: none;
+}
+
+.btn-fav {
+    background-color: #ccc;
+    padding: 8px;
+    border: none;
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
+import "./Header.css";
 
 const cookies = new Cookies();
 
@@ -9,13 +10,13 @@ function Header() {
   const usuario = cookies.get("user-auth-cookie");
 
   return (
-    <header>
-      <h1>
+    <header className="main-header">
+      <h1 className="logo">
         <Link to="/">Movie App</Link>
       </h1>
 
-      <nav>
-        <ul>
+      <nav className="header-nav">
+        <ul className="header-list">
           <li>
             <Link to="/">Home</Link>
           </li>

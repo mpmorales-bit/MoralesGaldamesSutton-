@@ -1,0 +1,40 @@
+.main-header {
+    background-color: rgb(9, 4, 36);
+    padding: 20px;
+    text-align: center;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.header-nav {
+    display: flex;  
+    flex-direction: column;  
+    align-items: center;  
+    gap: 10px;  
+}  
+
+.search-form {  
+    width: 300px;  
+}
+
+.header-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+}
+
+.header-list a {
+    color: rgb(15, 6, 32);
+    text-decoration: none;
+    font-size: 23px;
+
+}
+
+.header-list a:hover {
+    text-decoration: underline;
+}

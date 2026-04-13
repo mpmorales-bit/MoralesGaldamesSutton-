@@ -1,8 +1,9 @@
 import React from "react"
+import "./Footer.css";
 
 function Footer(){
     return(
-        <footer> 
+        <footer className="main-footer"> 
             <p> Paula Morales / Bernardita Galdames / Iosef Sutton </p>
         </footer>
     )

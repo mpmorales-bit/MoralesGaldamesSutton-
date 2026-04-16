@@ -22,11 +22,12 @@ class SeccionPopulares extends Component{
         <>
         <section className="row cards" id="movies">
             {populares.filter((pelicula, idx) => idx < 4).map((pelicula, idx) => (
-            <Peliculas key={pelicula + idx} 
+            <Peliculas key={pelicula.id} 
                         src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path} 
                         name={pelicula.title} 
                         description={pelicula.overview} 
-                        detalle={pelicula.id} />
+                        detalle={pelicula.id}
+                        tipo="pelicula" />
             ))}
         </section>
         </>

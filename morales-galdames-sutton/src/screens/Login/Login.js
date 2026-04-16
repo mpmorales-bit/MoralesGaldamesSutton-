@@ -55,7 +55,7 @@ class Login extends Component {
       error: ""
     });
 
-    alert("Login correcto");
+    this.props.history.push("/");
   }
 
   render() {

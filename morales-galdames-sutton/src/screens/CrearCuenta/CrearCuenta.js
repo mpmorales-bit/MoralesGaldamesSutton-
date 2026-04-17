@@ -81,7 +81,7 @@ class CrearCuenta extends Component{
                     <input type="email" placeholder="Email" value={this.state.email} onChange={(event) => this.controlarMail(event)}/>
                     <input type="password" placeholder="Password" value={this.state.password} onChange={(event) => this.controlarContraseña(event)}/>
                     <button type="submit">Crear cuenta</button>
-                    {this.state.error !== "" ? <p>{this.state.error}</p> : ""}
+                    {this.state.error !== "" ? <p className="mensaje-error">{this.state.error}</p> : ""}
                 </form>
                 </div>
                 </div>

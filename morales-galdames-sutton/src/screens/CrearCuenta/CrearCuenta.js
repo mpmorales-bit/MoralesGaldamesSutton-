@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import "./CrearCuenta.css";
 
 class CrearCuenta extends Component{
     constructor(props){
@@ -73,12 +74,17 @@ class CrearCuenta extends Component{
 
         render(){
             return(
-                <form onSubmit={(event)=> this.enviarFormulario(event)}>
+                <div className="crearcuenta-container">
+                <div className="crearcuenta-box">
+                <h2 className="crearcuenta-title">Crear cuenta</h2>
+                <form className="crearcuenta-form" onSubmit={(event)=> this.enviarFormulario(event)}>
                     <input type="email" placeholder="Email" value={this.state.email} onChange={(event) => this.controlarMail(event)}/>
                     <input type="password" placeholder="Password" value={this.state.password} onChange={(event) => this.controlarContraseña(event)}/>
                     <button type="submit">Crear cuenta</button>
                     {this.state.error !== "" ? <p>{this.state.error}</p> : ""}
                 </form>
+                </div>
+                </div>
             );
         }
 

@@ -5,15 +5,25 @@
 }
 
 .btn-detalle {
-    background-color: #eceeec;
-    color: rgb(245, 241, 241);
-    padding: 8px;
-    margin-right: 5px;
+    padding: 7.5px;
     text-decoration: none;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
 .btn-fav {
     background-color: #ccc;
-    padding: 8px;
     border: none;
+    font-size: 19px;
+    border-radius: 2.5px;
+}
+
+.btn-ocultar{
+    border-radius: 7px;
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.oculto{
+    display: none;
 }

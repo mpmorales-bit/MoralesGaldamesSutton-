@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Cookies from "universal-cookie";
 import "./Favoritos.css";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const cookies = new Cookies();
 
@@ -53,6 +55,8 @@ class Favoritos extends Component {
     });
 
     return (
+      <>
+      <Header/>
       <div className="favoritos">
         <h1>Mis favoritos</h1>
         <h2>Películas favoritas</h2>
@@ -87,6 +91,8 @@ class Favoritos extends Component {
           ))
         )}
       </div>
+      <Footer/>
+      </>
     );
   }
 }

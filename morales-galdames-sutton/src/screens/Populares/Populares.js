@@ -1,7 +1,10 @@
 import { Component } from 'react'
-import Peliculas from '../Peliculas/Peliculas';
+import Peliculas from '../../components/Peliculas/Peliculas';
+import "./Populares.css"
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 
-class Toprateds extends Component{
+class Populares extends Component{
     constructor(){
         super();
         this.state = { 
@@ -11,9 +14,9 @@ class Toprateds extends Component{
     }
 
     componentDidMount(){
-        fetch('')
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=0df8d28c1011b391dfb589da529c8b22')
         .then( response => response.json() )
-        .then( data => this.setState({ movies: '' }) )
+        .then( data => this.setState({ movies: data.results }) )
         .catch( error => console.log(error))
     }
 
@@ -27,8 +30,8 @@ class Toprateds extends Component{
     }
 
     filtrarPeliculas(textoAFiltrar){
-        return this.state.datos.filter(personaje =>
-            personaje.name.toLowerCase().includes(textoAFiltrar.toLowerCase())
+        return this.state.movies.filter(personaje =>
+            personaje.title.toLowerCase().includes(textoAFiltrar.toLowerCase())
         )
     }
 
@@ -38,24 +41,26 @@ class Toprateds extends Component{
 
         return(
             <>
-            <form onSubmit={(e) => this.evitarSubmit(e)}>
-                <label>Buscador</label>
-                <input type='text' onChange={(e) => this.controlarCambios(e)} value={this.state.busqueda}/>
+            <Header/>
+            <h1>Populares</h1>
+            <form className="form" onSubmit={(e) => this.evitarSubmit(e)}>
+                <input type='text' onChange={(e) => this.controlarCambios(e)} value={this.state.busqueda} placeholder="Buscar películas..."/>
             </form>
-            <section className='cardContainer'>
+            <section className='row cards'>
                 {
                 peliculasFiltradas.map((pelicula, idx) => (
                     <Peliculas key={pelicula + idx} 
-                        src={pelicula.poster_path} 
+                        src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path} 
                         name={pelicula.title} 
                         description={pelicula.overview} 
                         detalle={pelicula.id} />
                     ))}
             </section>
             <button >Cargar mas</button>
+            <Footer/>
             </>
         )
     }
 }
 
-export default Toprateds
+export default Populares

@@ -48,10 +48,12 @@ nav {
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+    align-items: end;
+    margin: 0 20px;
     margin-bottom: 2%;
 }
 .cardBody {
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .single-card-people {
     width: 19%;
@@ -60,8 +62,17 @@ nav {
     width: 24%;
 }
 .single-card-playing {
-    width: 15%;
+    width: 22%;
+    padding: 7px;
+    background-color: #2b1a45;
+    border-radius: 10px;
+    margin-bottom: 30px;
 }
+
+.card-img-top{
+    border-radius: 5px;
+}
+
 #now-playing .card-text{
     height: 100px;
     overflow: hidden;

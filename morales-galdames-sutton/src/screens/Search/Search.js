@@ -21,7 +21,8 @@ class Search extends Component{
     render(){
         return(
             <>
-                <form onSubmit={(e) => this.evitarSubmit(e)}>
+            
+                <form className="form" onSubmit={(e) => this.evitarSubmit(e)}>
                     <input type="text" onChange={(e) => this.controlarCambios(e)} value={this.state.busqueda} placeholder="Buscar películas..."/>
                 </form>
             </>

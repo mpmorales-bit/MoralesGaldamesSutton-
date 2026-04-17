@@ -21,6 +21,14 @@ function Header() {
             <Link to="/">Home</Link>
           </li>
 
+          <li>
+            <Link to="/Populares">Populares</Link>
+          </li>
+
+          <li>
+            <Link to="/Toprated">Top Rated</Link>
+          </li>
+
           {!usuario ? (
             <>
               <li>

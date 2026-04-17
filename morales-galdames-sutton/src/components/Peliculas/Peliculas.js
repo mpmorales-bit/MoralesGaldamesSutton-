@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import "./Peliculas.css";
+import { Component } from "react";
 
-function Peliculas(props){
+class Peliculas extends Component{
+    constructor(props){
+        super(props);
+        this.state = {show: false}
+    }
+    mostrar(){
+        this.setState({show: !this.state.show})
+    }
 
-    function agregarAFavoritos() {
+
+    agregarAFavoritos() {
         let favoritosGuardados = localStorage.getItem("favoritos");
         let favoritos = [];
 
@@ -12,29 +21,32 @@ function Peliculas(props){
         }
 
         let nuevoFavorito = {
-            id: props.detalle,
-            nombre: props.name,
-            imagen: props.src,
-            tipo: props.tipo
+            id: this.props.detalle,
+            nombre: this.props.name,
+            imagen: this.props.src,
+            tipo: this.props.tipo
         };
 
         favoritos.push(nuevoFavorito);
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
     }
 
-    return(
-        <>
-        <article className="single-card-playing">
-                <img src={props.src} className="card-img-top" alt="..." />
-                <div className="cardBody">
-                    <h5 className="card-title">{props.name}</h5>
-                    <p className="card-text">{props.description}</p>
-                    <Link to={`/detalles/${props.detalle}`} className="btn btn-primary"> Ir a detalle</Link>
-                    <button className="btn alert-primary" onClick={agregarAFavoritos}>♡</button>
-                </div>
-            </article>
-        </>
-    )
+    render(){
+        return(
+            <>
+                <article className="single-card-playing">
+                    <img src={this.props.src} className="card-img-top" alt="..." />
+                    <div className="cardBody">
+                        <h5 className="card-title">{this.props.name}</h5>
+                        <p className={`card-text ${this.state.show? "": "oculto"}`} >{this.props.description}</p>
+                        <button className="btn-ocultar" onClick={() => this.mostrar()}>{!this.state.show? "Mostrar descripcion": "Ocultar descripcion"}</button>
+                        <Link to={`/detalles/${this.props.detalle}`} className="btn-detalle btn-primary"> Ir a detalle</Link>
+                        <button className="btn-fav alert-primary" onClick={() => this.agregarAFavoritos()}>♡</button>
+                    </div>
+                </article>
+            </>
+        )
+    }
 }
 
 export default Peliculas;

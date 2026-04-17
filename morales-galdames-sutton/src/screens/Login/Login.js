@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Cookies from "universal-cookie";
 import "./Login.css";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const cookies = new Cookies();
 
@@ -60,6 +62,8 @@ class Login extends Component {
 
   render() {
     return (
+      <>
+      <Header/>
       <div className="login-container">
         <div className="login-box">
           <h2 className="login-title">Login</h2>
@@ -82,6 +86,8 @@ class Login extends Component {
           {this.state.error !== "" ? (<p className="login-error">{this.state.error}</p>) : null}
         </div>
       </div>
+      <Footer/>
+      </>
     );
   }
 }

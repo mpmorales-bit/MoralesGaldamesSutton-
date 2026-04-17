@@ -1,5 +1,7 @@
 import {Component} from 'react';
 import "./CrearCuenta.css";
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
 
 class CrearCuenta extends Component{
     constructor(props){
@@ -74,6 +76,8 @@ class CrearCuenta extends Component{
 
         render(){
             return(
+                <>
+                <Header/>
                 <div className="crearcuenta-container">
                 <div className="crearcuenta-box">
                 <h2 className="crearcuenta-title">Crear cuenta</h2>
@@ -85,6 +89,8 @@ class CrearCuenta extends Component{
                 </form>
                 </div>
                 </div>
+                <Footer/>
+                </>
             );
         }
 

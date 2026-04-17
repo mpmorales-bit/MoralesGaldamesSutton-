@@ -1,4 +1,6 @@
 import { Component } from "react"
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
 
 class DetalleDePelicula extends Component{
     constructor(props){
@@ -19,6 +21,7 @@ class DetalleDePelicula extends Component{
         const info = this.state.value
         return(
             <>
+            <Header/>
                 <article className="single-card-playing">
                     <img src={`https://image.tmdb.org/t/p/w500` + info.poster_path} className="card-img-top"
                         alt="..."/>
@@ -28,6 +31,7 @@ class DetalleDePelicula extends Component{
                         <a href="" className="btn alert-primary">🩶</a>
                     </div>
                 </article>
+                <Footer/>
             </>
         )
     }

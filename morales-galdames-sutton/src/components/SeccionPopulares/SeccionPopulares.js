@@ -1,6 +1,7 @@
 import { Component } from "react"
 import { withRouter} from 'react-router-dom'
 import Peliculas from "../Peliculas/Peliculas";
+import { Link } from "react-router-dom";
 
 class SeccionPopulares extends Component{
     constructor(){
@@ -29,6 +30,7 @@ class SeccionPopulares extends Component{
                         detalle={pelicula.id}
                         tipo="pelicula" />
             ))}
+            <Link to="/Populares">Ver todas</Link>
         </section>
         </>
         )

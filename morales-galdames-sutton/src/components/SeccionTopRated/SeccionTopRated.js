@@ -1,6 +1,7 @@
 import { Component } from "react"
 import { withRouter} from 'react-router-dom'
 import Peliculas from "../Peliculas/Peliculas";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 class SeccionTopRated extends Component{
     constructor(){
@@ -29,6 +30,7 @@ class SeccionTopRated extends Component{
                         detalle={pelicula.id} 
                         tipo="pelicula" />
             )}
+            <Link to="/TopRated">Ver todas</Link>
         </section>
         </>
         )

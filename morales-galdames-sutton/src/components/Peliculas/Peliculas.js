@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 import "./Peliculas.css";
 import { Component } from "react";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies();
 
 class Peliculas extends Component{
     constructor(props){
@@ -10,27 +13,29 @@ class Peliculas extends Component{
     mostrar(){
         this.setState({show: !this.state.show})
     }
-
-
     agregarAFavoritos() {
         let favoritosGuardados = localStorage.getItem("favoritos");
         let favoritos = [];
-
         if (favoritosGuardados !== null) {
             favoritos = JSON.parse(favoritosGuardados);
         }
-
-        let nuevoFavorito = {
-            id: this.props.detalle,
-            nombre: this.props.name,
-            imagen: this.props.src,
-            tipo: this.props.tipo
-        };
-
-        favoritos.push(nuevoFavorito);
-        localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        let yaExiste = false;
+        for (let i = 0; i < favoritos.length; i++) {
+            if (favoritos[i].id === this.props.detalle) {
+                yaExiste = true;
+            }
+        }
+        if (!yaExiste) {
+            let nuevoFavorito = {
+                id: this.props.detalle,
+                nombre: this.props.name,
+                imagen: this.props.src,
+                tipo: this.props.tipo
+            };
+            favoritos.push(nuevoFavorito);
+            localStorage.setItem("favoritos", JSON.stringify(favoritos));
+        }
     }
-
     render(){
         return(
             <>
@@ -41,7 +46,8 @@ class Peliculas extends Component{
                         <p className={`card-text ${this.state.show? "": "oculto"}`} >{this.props.description}</p>
                         <button className="btn-ocultar" onClick={() => this.mostrar()}>{!this.state.show? "Mostrar descripcion": "Ocultar descripcion"}</button>
                         <Link to={`/detalles/${this.props.detalle}`} className="btn-detalle btn-primary"> Ir a detalle</Link>
-                        <button className="btn-fav alert-primary" onClick={() => this.agregarAFavoritos()}>♡</button>
+                        {cookies.get("user-auth-cookie") && (
+                        <button className="btn-fav alert-primary" onClick={() => this.agregarAFavoritos()}>♡</button>)}
                     </div>
                 </article>
             </>

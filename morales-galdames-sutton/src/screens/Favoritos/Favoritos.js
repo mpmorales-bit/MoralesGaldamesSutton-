@@ -64,16 +64,18 @@ class Favoritos extends Component {
         {peliculas.length === 0 ? (
           <p>No hay películas favoritas</p>
         ) : (
-          peliculas.map((elemento) => (
-            <article key={elemento.id}>
-              <img src={elemento.imagen} alt={elemento.nombre} />
-              <h3>{elemento.nombre}</h3>
-              <Link to={`/detalle/${elemento.id}`}>
-                Ver detalle
-              </Link>
-              <button onClick={() => this.eliminarFavorito(elemento.id)}>Eliminar</button>
-            </article>
-          ))
+          <section className="favoritos-section">
+            {peliculas.map((elemento) => (
+              <article key={elemento.id}>
+                <img src={elemento.imagen} alt={elemento.nombre} />
+                <h3>{elemento.nombre}</h3>
+                <Link to={`/detalle/${elemento.id}`}>
+                  Ver detalle
+                </Link>
+                <button onClick={() => this.eliminarFavorito(elemento.id)}>Eliminar</button>
+              </article>
+            ))}
+          </section>
         )}
 
         <h2>Series favoritas</h2>
@@ -81,14 +83,16 @@ class Favoritos extends Component {
         {series.length === 0 ? (
           <p>No hay series favoritas</p>
         ) : (
-          series.map((elemento) => (
-            <article key={elemento.id}>
-              <img src={elemento.imagen} alt={elemento.nombre} />
-              <h3>{elemento.nombre}</h3>
-              <Link to={`/detalle/${elemento.id}`}> Ver detalle</Link>
-              <button onClick={() => this.eliminarFavorito(elemento.id)}>Eliminar</button>
-            </article>
-          ))
+          <section className="favoritos-section">
+            {series.map((elemento) => (
+              <article key={elemento.id}>
+                <img src={elemento.imagen} alt={elemento.nombre} />
+                <h3>{elemento.nombre}</h3>
+                <Link to={`/detalle/${elemento.id}`}> Ver detalle</Link>
+                <button onClick={() => this.eliminarFavorito(elemento.id)}>Eliminar</button>
+              </article>
+            ))}
+          </section>
         )}
       </div>
       <Footer/>

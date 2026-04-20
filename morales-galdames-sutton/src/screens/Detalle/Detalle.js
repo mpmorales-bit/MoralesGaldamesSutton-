@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Cookies from "universal-cookie";
+import Loader from "../../components/Loader/Loader";
 
 const cookies = new Cookies();
 
@@ -9,15 +10,20 @@ class Detalle extends Component{
     constructor(props){
         super(props);
         this.state = {
-            informacion : null
-        }  
+            informacion : null,
+            cargando : true
+        };
     }
     componentDidMount(){
         const id = this.props.match.params.id;
 
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=0df8d28c1011b391dfb589da529c8b22`)
             .then(response => response.json())
-            .then(data => {this.setState({informacion: data})})
+            .then(data => {
+                this.setState({
+                informacion: data,
+                cargando : false})
+            })
             .catch(error => console.log(error))
     }
 
@@ -40,7 +46,7 @@ class Detalle extends Component{
 
     render(){
         if (this.state.informacion === null){
-            return <p>Cargando...</p>
+            return <Loader />;
         }
 
         let info = this.state.informacion;

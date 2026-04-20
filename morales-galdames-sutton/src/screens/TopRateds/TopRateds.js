@@ -8,6 +8,7 @@ class Toprateds extends Component{
         super();
         this.state = { 
             movies: [],
+            page: 1,
             busqueda: ''
         }
     }
@@ -34,6 +35,18 @@ class Toprateds extends Component{
         )
     }
 
+    cargarMas(){
+        let page = this.state.page + 1
+
+        fetch(`https://api.themoviedb.org/3/movie/top_rated?api_key=0df8d28c1011b391dfb589da529c8b22&page=${page}`)
+        .then( response => response.json() )
+        .then( data => this.setState({ 
+            page: page,
+            movies: this.state.movies.concat(data.results)  
+        }) )
+        .catch( error => console.log(error))
+    }
+
     render(){
         const peliculas = this.state.movies
         const peliculasFiltradas = this.filtrarPeliculas(this.state.busqueda)
@@ -55,7 +68,7 @@ class Toprateds extends Component{
                         detalle={pelicula.id} />
                     ))}
             </section>
-            <button >Cargar mas</button>
+            <button onClick={() => this.cargarMas()}>Cargar mas</button>
             <Footer/>
             </>
         )

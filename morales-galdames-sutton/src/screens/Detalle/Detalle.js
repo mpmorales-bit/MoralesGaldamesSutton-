@@ -95,7 +95,7 @@ class Detalle extends Component{
                         <h1 className="titulo-detalle">{tipo === "movie" ? info.title : info.name}</h1>
                         <p><strong>Calificacion:</strong> {info.vote_average}</p>
                         <p><strong>Fecha de estreno:</strong> {tipo === "movie" ? info.release_date : info.first_air_date}</p>
-                        <p><strong>Duración:</strong> {tipo === "movie" ? info.runtime + " minutos" : null}</p>
+                        {tipo === "movie" && (<p><strong>Duración: </strong> {info.runtime} minutos</p>)}
                         <p><strong>Sinopsis:</strong> {info.overview}</p>
                         <p><strong>Genero:</strong>{info.genres ? info.genres.map(genero => genero.name + ", "): "No tiene genero"}</p>
                         {cookies.get("user-auth-cookie") && (

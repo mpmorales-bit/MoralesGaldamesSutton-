@@ -2,6 +2,7 @@ import react, { Component } from 'react'
 import Peliculas from '../../components/Peliculas/Peliculas';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import Loader from "../../components/Loader/Loader";
 
 class Resultados extends Component{
   constructor(props){
@@ -27,15 +28,19 @@ class Resultados extends Component{
     return (
         <>
         <Header/>
-            <h1>Resultados:</h1>
+        <h1>Resultados de busqueda:</h1>
             <section className="row cards" id="movies">
-                {this.state.resultados.map((pelicula, idx) => 
-                <Peliculas key={pelicula + idx} 
+                {this.state.resultados.length === 0 ? 
+                <Loader/> :
+                    this.state.resultados.map((pelicula, idx) => (
+                      <Peliculas key={pelicula.id + idx} 
                         src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path}
-                        name= {pelicula.title}
+                        name= {pelicula.title || pelicula.name}
                         description={pelicula.overview} 
-                        detalle={pelicula.id} />
-                )}
+                        detalle={pelicula.id} 
+                        tipo={this.props.match.params.tipo}
+                      />
+                ))}
             </section>
             <Footer/>
         </>

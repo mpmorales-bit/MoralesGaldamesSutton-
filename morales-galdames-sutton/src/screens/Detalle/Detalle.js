@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import React, {Component} from 'react';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Cookies from "universal-cookie";
@@ -14,9 +14,8 @@ class Detalle extends Component{
     }
     componentDidMount(){
         const id = this.props.match.params.id;
-        let tipo = this.props.match.params.tipo;
 
-        fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=c20d2da133e58ff4cdd61efde80a09ce`)
+        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=0df8d28c1011b391dfb589da529c8b22`)
             .then(response => response.json())
             .then(data => {this.setState({informacion: data})})
             .catch(error => console.log(error))
@@ -27,14 +26,13 @@ class Detalle extends Component{
         (favoritos === null)? favoritos=[] : favoritos=JSON.parse(favoritos);
 
         let info = this.state.informacion;
-        let tipo = this.props.match.params.tipo;
 
         let favorito = {
             id : info.id,
-            titulo : tipo === "movie" ? info.title : info.name,
-            tipo : tipo,
+            titulo : info.title,
+            tipo : "movie",
             poster_path : info.poster_path
-        }
+        };
         
         favoritos.push(favorito);
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
@@ -46,19 +44,18 @@ class Detalle extends Component{
         }
 
         let info = this.state.informacion;
-        let tipo = this.props.match.params.tipo;
 
         return(
             <>
                <Header />
-               <img src={`https://image.tmdb.org/t/p/w480/${info.poster_path}`} alt={tipo === "movie" ? info.title : info.name}/>
-               <h1>{tipo === "movie" ? info.title : info.name}</h1>
+               <img src={`https://image.tmdb.org/t/p/w480/${info.poster_path}`} alt={info.title}/>
+               <h1>{info.title}</h1>
                <p>Calificacion: {info.vote_average}</p>
-               <p>Fecha de estreno: {tipo ==="movie" ? info.release_date : info.first_air_date}</p>
-               {tipo === "movie" ? <p>Duración: {info.runtime} minutos</p> : null}
+               <p>Fecha de estreno: {info.release_date}</p>
+               <p>Duración: {info.runtime} minutos</p>
                <p>Sinopsis: {info.overview}</p>
-               <p>Genero:{info.genres.map(genero => genero.name + ", ")}</p>
-               {cookies.get("user-auth-cookie") !== undefined ? <button onClick={() => this.agregarFavorito()}>Agregar a favoritos</button> : null}
+               <p>Genero:{info.genres ? info.genres.map(genero => genero.name): "No tiene genero"}</p>
+               {cookies.get("user-auth-cookie") !== "undefined" ? <button onClick={() => this.agregarFavorito()}>Agregar a favoritos</button> : null}
                <Footer/>
             </>
         )

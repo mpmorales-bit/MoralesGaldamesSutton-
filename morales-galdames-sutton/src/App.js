@@ -7,7 +7,7 @@ import Favoritos from "./screens/Favoritos/Favoritos";
 import Login from "./screens/Login/Login";
 import Populares from "./screens/Populares/Populares";
 import Toprateds from "./screens/TopRateds/TopRateds";
-import DetalleDePelicula from "./screens/DetalleDePelicula/DetalleDePelicula";
+import Detalle from "./screens/Detalle/Detalle";
 import "./App.css";
 import NotFound from "./screens/NotFound/NotFound";
 
@@ -22,7 +22,7 @@ return(
         <Route path="/Populares" component={Populares}/>
         <Route path="/Toprated" component={Toprateds}/>
         <Route path="/resultados/:busqueda" component={Resultados}/>
-        <Route path="/detalles/:id" component={DetalleDePelicula}/>
+        <Route path="/Detalle/:id" component={Detalle}/>
         <Route path="" component={NotFound}/>
     </Switch>
     </>

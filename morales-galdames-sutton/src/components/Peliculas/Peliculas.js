@@ -45,7 +45,7 @@ class Peliculas extends Component{
                         <h5 className="card-title">{this.props.name}</h5>
                         <p className={`card-text ${this.state.show? "": "oculto"}`} >{this.props.description}</p>
                         <button className="btn-ocultar" onClick={() => this.mostrar()}>{!this.state.show? "Mostrar descripcion": "Ocultar descripcion"}</button>
-                        <Link to={`/detalles/${this.props.detalle}`} className="btn-detalle btn-primary"> Ir a detalle</Link>
+                        <Link to={`/Detalle/${this.props.id}`} className="btn-detalle btn-primary"> Ir a detalle</Link>
                         {cookies.get("user-auth-cookie") && (
                         <button className="btn-fav alert-primary" onClick={() => this.agregarAFavoritos()}>♡</button>)}
                     </div>

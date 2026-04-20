@@ -1,7 +1,7 @@
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Main from "../../components/Main/Main";
-import Search from "../Search/Search";
+import Search from "../../components/Search/Search";
 import "./Home.css";
 
 function Home() {

@@ -3,6 +3,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Cookies from "universal-cookie";
 import Loader from "../../components/Loader/Loader";
+import "./Detalle.css";
 
 const cookies = new Cookies();
 
@@ -84,19 +85,24 @@ class Detalle extends Component{
         return(
             <>
                <Header />
-               <img src={`https://image.tmdb.org/t/p/w500${info.poster_path}`} alt={info.title}/>
-               <h1>{info.title}</h1>
-               <p>Calificacion: {info.vote_average}</p>
-               <p>Fecha de estreno: {info.release_date}</p>
-               <p>Duración: {info.runtime} minutos</p>
-               <p>Sinopsis: {info.overview}</p>
-               <p>Genero:{info.genres ? info.genres.map(genero => genero.name): "No tiene genero"}</p>
-               {cookies.get("user-auth-cookie") && (
-                    this.state.esFavorito ? (
-                        <button onClick={this.eliminarDeFavoritos}>♡ Quitar de favoritos</button>
-                    ) : (
-                        <button className="btn-fav alert-primary" onClick={() => this.agregarAFavoritos()}>♡</button>))}
-               <Footer/>
+               <section className="container-detalle">
+                    <img className="imagen-detalle" src={`https://image.tmdb.org/t/p/w500${info.poster_path}`} alt={info.title}/>
+
+                    <article className="info-detalle">
+                        <h1 className="titulo-detalle">{info.title}</h1>
+                        <p><strong>Calificacion:</strong> {info.vote_average}</p>
+                        <p><strong>Fecha de estreno:</strong> {info.release_date}</p>
+                        <p><strong>Duración:</strong> {info.runtime} minutos</p>
+                        <p><strong>Sinopsis:</strong> {info.overview}</p>
+                        <p><strong>Genero:</strong>{info.genres ? info.genres.map(genero => genero.name + ", "): "No tiene genero"}</p>
+                        {cookies.get("user-auth-cookie") && (
+                             this.state.esFavorito ? (
+                                 <button onClick={this.eliminarDeFavoritos}>♡ Quitar de favoritos</button>
+                             ) : (
+                                 <button onClick={() => this.agregarAFavoritos()}>♡</button>))}
+                    </article>
+                </section>
+                <Footer/>
             </>
         )
     }

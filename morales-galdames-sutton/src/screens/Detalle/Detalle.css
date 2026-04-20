@@ -1,0 +1,19 @@
+.container-detalle{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 15px;
+    min-height: 80vh;
+}
+
+.imagen-detalle{
+    width: 300px;
+    margin: 20px;
+}
+
+.titulo-detalle{
+    font-size: 30px;
+}
+
+

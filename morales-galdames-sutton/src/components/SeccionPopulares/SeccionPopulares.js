@@ -28,7 +28,7 @@ class SeccionPopulares extends Component{
                         name={pelicula.title} 
                         description={pelicula.overview} 
                         detalle={pelicula.id}
-                        tipo="pelicula" />
+                        tipo="movie" />
             ))}
             <Link to="/Populares">Ver todas</Link>
         </section>

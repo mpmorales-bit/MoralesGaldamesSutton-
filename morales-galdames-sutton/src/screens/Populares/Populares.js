@@ -66,7 +66,9 @@ class Populares extends Component{
                         src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path} 
                         name={pelicula.title} 
                         description={pelicula.overview} 
-                        detalle={pelicula.id} />
+                        detalle={pelicula.id}
+                        tipo="movie" 
+                        />
                     ))}
             </section>
             <button onClick={() => this.cargarMas()}>Cargar mas</button>

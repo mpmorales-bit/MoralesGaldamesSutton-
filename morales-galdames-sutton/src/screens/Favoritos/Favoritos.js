@@ -47,11 +47,11 @@ class Favoritos extends Component {
 
   render() {
     let peliculas = this.state.favoritos.filter(function (elemento) {
-      return elemento.tipo === "pelicula";
+      return elemento.tipo === "movie";
     });
 
     let series = this.state.favoritos.filter(function (elemento) {
-      return elemento.tipo === "serie";
+      return elemento.tipo === "tv";
     });
 
     return (
@@ -67,9 +67,9 @@ class Favoritos extends Component {
           <section className="favoritos-section">
             {peliculas.map((elemento) => (
               <article key={elemento.id}>
-                <img src={elemento.imagen} alt={elemento.nombre} />
-                <h3>{elemento.nombre}</h3>
-                <Link to={`/detalle/${elemento.id}`}>
+                <img src={`https://image.tmdb.org/t/p/w342${elemento.poster_path}`} alt={elemento.titulo} />
+                <h3>{elemento.titulo}</h3>
+                <Link to={`/Detalle/movie/${elemento.id}`}>
                   Ver detalle
                 </Link>
                 <button onClick={() => this.eliminarFavorito(elemento.id)}>Eliminar</button>
@@ -86,9 +86,9 @@ class Favoritos extends Component {
           <section className="favoritos-section">
             {series.map((elemento) => (
               <article key={elemento.id}>
-                <img src={elemento.imagen} alt={elemento.nombre} />
-                <h3>{elemento.nombre}</h3>
-                <Link to={`/detalle/${elemento.id}`}> Ver detalle</Link>
+                <img src={elemento.poster_path} alt={elemento.titulo} />
+                <h3>{elemento.titulo}</h3>
+                <Link to={`/Detalle/tv/${elemento.id}`}> Ver detalle</Link>
                 <button onClick={() => this.eliminarFavorito(elemento.id)}>Eliminar</button>
               </article>
             ))}

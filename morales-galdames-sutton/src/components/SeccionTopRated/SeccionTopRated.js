@@ -28,7 +28,7 @@ class SeccionTopRated extends Component{
                         name={pelicula.title} 
                         description={pelicula.overview} 
                         detalle={pelicula.id} 
-                        tipo="pelicula" />
+                        tipo="movie" />
             )}
             <Link to="/TopRated">Ver todas</Link>
         </section>

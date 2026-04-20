@@ -31,8 +31,8 @@ class Resultados extends Component{
             <section className="row cards" id="movies">
                 {this.state.resultados.map((pelicula, idx) => 
                 <Peliculas key={pelicula + idx} 
-                        src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path} 
-                        name={pelicula.title} 
+                        src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path}
+                        name= {pelicula.title}
                         description={pelicula.overview} 
                         detalle={pelicula.id} />
                 )}

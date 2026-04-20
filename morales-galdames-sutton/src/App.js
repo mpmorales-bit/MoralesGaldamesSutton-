@@ -22,7 +22,7 @@ return(
         <Route path="/Populares" component={Populares}/>
         <Route path="/Toprated" component={Toprateds}/>
         <Route path="/resultados/:tipo/:busqueda" component={Resultados}/>
-        <Route path="/Detalle/:id" component={Detalle}/>
+        <Route path="/Detalle/:tipo/:id" component={Detalle}/>
         <Route path="" component={NotFound}/>
     </Switch>
     </>

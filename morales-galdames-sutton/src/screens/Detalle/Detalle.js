@@ -19,8 +19,9 @@ class Detalle extends Component{
 
     componentDidMount(){
         const id = this.props.match.params.id;
+        let tipo = this.props.match.params.tipo;
 
-        fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=c20d2da133e58ff4cdd61efde80a09ce`)
+        fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=c20d2da133e58ff4cdd61efde80a09ce`)
             .then(response => response.json())
             .then(data => {
                 let yaEsFavorito = this.estaEnFavoritos(data.id);
@@ -44,7 +45,7 @@ class Detalle extends Component{
 
     agregarAFavoritos=() => {
         if (this.state.esFavorito) {
-            alert("Esta pelicula ya está en favoritos");
+            alert("Ya está en favoritos");
             return;
         }
 
@@ -52,10 +53,11 @@ class Detalle extends Component{
         favoritos = (favoritos === null)? [] : JSON.parse(favoritos);
 
         let info = this.state.informacion;
+        let tipo = this.props.match.params.tipo;
         let favorito = {
             id : info.id,
-            titulo : info.title,
-            tipo : "movie",
+            titulo : tipo === "movie" ? info.title : info.name,
+            tipo : tipo,
             poster_path : info.poster_path
         };
         
@@ -73,7 +75,7 @@ class Detalle extends Component{
         localStorage.setItem("favoritos", JSON.stringify(favoritoNuevo));
         
         this.setState({esFavorito : false});
-        alert("Eliminaste esta pelicula de favoritos");
+        alert("Lo eliminaste de favoritos");
     }
 
 
@@ -81,18 +83,19 @@ class Detalle extends Component{
         if (this.state.cargando) return <Loader />;
 
         let info = this.state.informacion;
+        let tipo = this.props.match.params.tipo;
 
         return(
             <>
                <Header />
                <section className="container-detalle">
-                    <img className="imagen-detalle" src={`https://image.tmdb.org/t/p/w500${info.poster_path}`} alt={info.title}/>
+                    <img className="imagen-detalle" src={`https://image.tmdb.org/t/p/w500${info.poster_path}`} alt= {tipo === "movie" ? info.title : info.name}/>
 
                     <article className="info-detalle">
-                        <h1 className="titulo-detalle">{info.title}</h1>
+                        <h1 className="titulo-detalle">{tipo === "movie" ? info.title : info.name}</h1>
                         <p><strong>Calificacion:</strong> {info.vote_average}</p>
-                        <p><strong>Fecha de estreno:</strong> {info.release_date}</p>
-                        <p><strong>Duración:</strong> {info.runtime} minutos</p>
+                        <p><strong>Fecha de estreno:</strong> {tipo === "movie" ? info.release_date : info.first_air_date}</p>
+                        <p><strong>Duración:</strong> {tipo === "movie" ? info.runtime + " minutos" : null}</p>
                         <p><strong>Sinopsis:</strong> {info.overview}</p>
                         <p><strong>Genero:</strong>{info.genres ? info.genres.map(genero => genero.name + ", "): "No tiene genero"}</p>
                         {cookies.get("user-auth-cookie") && (

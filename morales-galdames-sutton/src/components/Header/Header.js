@@ -12,7 +12,7 @@ function Header() {
   return (
     <header className="main-header">
       <h1 className="logo">
-        <Link to="/">Movie App</Link>
+        <Link to="/">Digital Movies</Link>
       </h1>
 
       <nav className="header-nav">

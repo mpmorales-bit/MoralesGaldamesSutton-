@@ -3,6 +3,7 @@ import Peliculas from '../../components/Peliculas/Peliculas';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import Loader from "../../components/Loader/Loader";
+import './Resultados.css';
 
 class Resultados extends Component{
   constructor(props){
@@ -27,11 +28,15 @@ class Resultados extends Component{
   render(){
     return (
         <>
+        <div className="pagina-resultados">
         <Header/>
-        <h1>Resultados de busqueda:</h1>
-            <section className="row cards" id="movies">
+        <main className="container-resultados">
+          <h1 className="titulo-resultados">Resultados de busqueda:</h1>
+            <section className="row-cards-peliculas">
                 {this.state.resultados.length === 0 ? 
-                <Loader/> :
+                <div className="container-loader">
+                <Loader/> 
+                </div> :
                     this.state.resultados.map((pelicula, idx) => (
                       <Peliculas key={pelicula.id + idx} 
                         src={`https://image.tmdb.org/t/p/w500` + pelicula.poster_path}
@@ -42,8 +47,10 @@ class Resultados extends Component{
                       />
                 ))}
             </section>
-            <Footer/>
-        </>
+          </main>
+          <Footer/>
+        </div>
+      </>
     )
   }
 }

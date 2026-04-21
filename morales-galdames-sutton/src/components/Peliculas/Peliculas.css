@@ -1,6 +1,7 @@
 .card-actions {
     display: flex;
-    justify-content: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center; 
     gap: 6px; 
     margin-top: 10px;

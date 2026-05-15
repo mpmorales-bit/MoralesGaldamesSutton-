@@ -1,64 +1,67 @@
 import { Link } from "react-router-dom";
 import "./Peliculas.css";
-import { Component } from "react";
+import { Component, useState } from "react";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies();
 
-class Peliculas extends Component{
-    constructor(props){
-        super(props);
-        this.state = {show: false}
+function Peliculas(props){
+
+    const[show,setShow] = useState(false)
+
+    function mostrar(){
+        setShow(!show)
     }
-    mostrar(){
-        this.setState({show: !this.state.show})
-    }
-    agregarAFavoritos() {
+
+    function agregarAFavoritos() {
         let favoritosGuardados = localStorage.getItem("favoritos");
         let favoritos = [];
+
         if (favoritosGuardados !== null) {
             favoritos = JSON.parse(favoritosGuardados);
         }
+
         let yaExiste = false;
         for (let i = 0; i < favoritos.length; i++) {
-            if (favoritos[i].id === this.props.detalle) {
+            if (favoritos[i].id === props.detalle) {
                 yaExiste = true;
             }
         }
+
         if (!yaExiste) {
             let nuevoFavorito = {
-                id: this.props.detalle,
-                titulo: this.props.name,
-                poster_path: this.props.src,
-                tipo: this.props.tipo
+                id: props.detalle,
+                titulo: props.name,
+                poster_path: props.src,
+                tipo: props.tipo
             };
+
             favoritos.push(nuevoFavorito);
             localStorage.setItem("favoritos", JSON.stringify(favoritos));
         }
     }
 
-    eliminarDeFavoritos(){
+    function eliminarDeFavoritos(){
         let favoritosGuardados=localStorage.getItem("favoritos");
         let favoritos=favoritosGuardados!==null?JSON.parse(favoritosGuardados):[];
-        let filtrados=favoritos.filter(f=>f.id!==this.props.detalle);
+        let filtrados=favoritos.filter(f=>f.id !== props.detalle);
         localStorage.setItem("favoritos",JSON.stringify(filtrados));
     }
 
-    render(){
         return(
             <>
                 <article className="single-card-playing">
-                    <img src={this.props.src} className="card-img-top" alt="..." />
+                    <img src={props.src} className="card-img-top" alt="..." />
                     <div className="cardBody">
-                        <h5 className="card-title">{this.props.name}</h5>
-                        <p className={`card-text ${this.state.show?"":"oculto"}`}>{this.props.description}</p>
+                        <h5 className="card-title">{props.name}</h5>
+                        <p className={`card-text ${ show?"":"oculto"}`}>{props.description}</p>
                         <div className="card-actions">
-                            <button className="btn-ocultar" onClick={()=>this.mostrar()}>{!this.state.show?"Mostrar descripcion":"Ocultar descripcion"}</button>
-                            <Link to={`/Detalle/${this.props.tipo}/${this.props.detalle}`} className="btn-detalle btn-primary">Ir a detalle</Link>
+                            <button className="btn-ocultar" onClick={()=>mostrar()}>{!show?"Mostrar descripcion":"Ocultar descripcion"}</button>
+                            <Link to={`/Detalle/${props.tipo}/${props.detalle}`} className="btn-detalle btn-primary">Ir a detalle</Link>
                             {cookies.get("user-auth-cookie")&&(
                                 <>
-                                    <button className="btn-fav alert-primary" onClick={()=>this.agregarAFavoritos()}>♡</button>
-                                    <button className="btn-eliminar" onClick={()=>this.eliminarDeFavoritos()}>Eliminar</button>
+                                    <button className="btn-fav alert-primary" onClick={()=>agregarAFavoritos()}>♡</button>
+                                    <button className="btn-eliminar" onClick={()=>eliminarDeFavoritos()}>Eliminar</button>
                                 </>
                             )}
                         </div>
@@ -67,6 +70,5 @@ class Peliculas extends Component{
             </>
         )
     }
-}
 
 export default Peliculas;

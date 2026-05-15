@@ -1,23 +1,19 @@
-import { Component } from "react"
-import { withRouter} from 'react-router-dom'
+import { useState, useEffect } from "react"
 import Peliculas from "../Peliculas/Peliculas";
 import { Link } from "react-router-dom";
 
-class SeccionPopulares extends Component{
-    constructor(){
-        super();
-        this.state = { movies: [] }
-    }
+function SeccionPopulares(){
 
-    componentDidMount(){
+    const[movies,setMovies] = useState([])
+
+    useEffect(() => {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=0df8d28c1011b391dfb589da529c8b22')
         .then( response => response.json() )
-        .then( data => this.setState({movies: data.results}) )
+        .then( data => setMovies(data.results) )
         .catch( error => console.log(error))
-    }
-
-    render(){
-        const populares = this.state.movies
+    }, [])
+    
+        const populares = movies
 
         return(
         <>
@@ -35,6 +31,5 @@ class SeccionPopulares extends Component{
         </>
         )
     }
-}
 
-export default withRouter(SeccionPopulares)
+export default SeccionPopulares

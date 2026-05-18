@@ -1,41 +1,34 @@
-import React, {Component} from 'react';
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Cookies from "universal-cookie";
 import Loader from "../../components/Loader/Loader";
 import "./Detalle.css";
+import {useState, useEffect} from "react";
 
 const cookies = new Cookies();
 
-class Detalle extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            informacion : null,
-            cargando : true,
-            esFavorito : false
-        };
-    }
+function Detalle (props){
+    const [informacion, setInformacion] = useState(null);
+    const [cargando, setCargando ] = useState(true);
+    const [esFavorito, setEsFavorito] = useState(false);
 
-    componentDidMount(){
-        const id = this.props.match.params.id;
-        let tipo = this.props.match.params.tipo;
+    useEffect(() => {
+        const id = props.match.params.id;
+        let tipo = props.match.params.tipo;
 
         fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=c20d2da133e58ff4cdd61efde80a09ce`)
             .then(response => response.json())
             .then(data => {
-                let yaEsFavorito = this.estaEnFavoritos(data.id);
+                let yaEsFavorito = estaEnFavoritos(data.id);
                 
-                this.setState({
-                     informacion: data,
-                     cargando : false,
-                     esFavorito : yaEsFavorito
-                })
+                setInformacion(data);
+                setCargando(false);
+                setEsFavorito(yaEsFavorito);
             })
-            .catch(error => console.log(error))    
-    };
+            .catch(error => console.log(error));    
+    }, []);
 
-    estaEnFavoritos(id) {
+    function estaEnFavoritos(id) {
         let favoritos = localStorage.getItem("favoritos");
         favoritos = (favoritos === null) ? [] : JSON.parse(favoritos);
 
@@ -43,8 +36,8 @@ class Detalle extends Component{
         return encontrado.length > 0;
     }
 
-    agregarAFavoritos=() => {
-        if (this.state.esFavorito) {
+    function agregarAFavoritos() {
+        if (esFavorito) {
             alert("Ya está en favoritos");
             return;
         }
@@ -52,38 +45,38 @@ class Detalle extends Component{
         let favoritos = localStorage.getItem("favoritos");
         favoritos = (favoritos === null)? [] : JSON.parse(favoritos);
 
-        let info = this.state.informacion;
-        let tipo = this.props.match.params.tipo;
+        let tipo = props.match.params.tipo;
+
         let favorito = {
-            id : info.id,
-            titulo : tipo === "movie" ? info.title : info.name,
+            id : informacion.id,
+            titulo : tipo === "movie" ? informacion.title : informacion.name,
             tipo : tipo,
-            poster_path : info.poster_path
+            poster_path : informacion.poster_path
         };
         
         favoritos.push(favorito);
         localStorage.setItem("favoritos", JSON.stringify(favoritos));
     
-        this.setState({esFavorito:true})
+        setEsFavorito(true);
         alert("Lo agregaste a favoritos!");
     };
 
-    eliminarDeFavoritos = () => {
+    function eliminarDeFavoritos() {
         let favoritos = JSON.parse(localStorage.getItem("favoritos"));
-        let favoritoNuevo = favoritos.filter(fav => fav.id !== this.state.informacion.id);
+        let favoritoNuevo = favoritos.filter(fav => fav.id !== informacion.id);
 
         localStorage.setItem("favoritos", JSON.stringify(favoritoNuevo));
         
-        this.setState({esFavorito : false});
+        setEsFavorito(false);
         alert("Lo eliminaste de favoritos");
     }
 
 
-    render(){
-        if (this.state.cargando) return <Loader />;
+   
+    if (cargando) return <Loader />;
 
-        let info = this.state.informacion;
-        let tipo = this.props.match.params.tipo;
+    let info = informacion;
+    let tipo = props.match.params.tipo;
 
         return(
             <>
@@ -99,16 +92,16 @@ class Detalle extends Component{
                         <p><strong>Sinopsis:</strong> {info.overview}</p>
                         <p><strong>Genero:</strong>{info.genres ? info.genres.map(genero => genero.name + ", "): "No tiene genero"}</p>
                         {cookies.get("user-auth-cookie") && (
-                             this.state.esFavorito ? (
-                                 <button onClick={this.eliminarDeFavoritos}>♡ Quitar de favoritos</button>
+                             esFavorito ? (
+                                 <button onClick={eliminarDeFavoritos}>♡ Quitar de favoritos</button>
                              ) : (
-                                 <button onClick={() => this.agregarAFavoritos()}>♡</button>))}
+                                 <button onClick={() => agregarAFavoritos()}>♡</button>))}
                     </article>
                 </section>
                 <Footer/>
             </>
         )
     }
-}
+
 
 export default Detalle; 

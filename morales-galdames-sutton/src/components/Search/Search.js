@@ -1,45 +1,36 @@
-import { Component } from "react"
-import { withRouter } from 'react-router-dom'
 import "./Search.css" ;
+import {useState} from "react";
+import { withRouter } from "react-router-dom";
 
-class Search extends Component{
-    constructor(){
-        super();
-        this.state = {
-            busqueda: '',
-            tipo: 'movie'
-        }
-    }
+function Search (props){
+    const [busqueda, setBusqueda] = useState("");
+    const [tipo, setTipo] = useState('movie');
 
-    evitarSubmit(e){
+    function evitarSubmit(e){
         e.preventDefault();
-        this.props.history.push("/resultados/" + this.state.tipo + "/" + this.state.busqueda)
+        props.history.push("/resultados/" + tipo + "/" + busqueda)
     } 
 
-    controlarCambios(e){
-        this.setState({busqueda: e.target.value})
+    function controlarCambios(e){
+        setBusqueda(e.target.value);
     }
 
-    controlarTipo(e){
-        this.setState({
-            tipo: e.target.value
-        })
+    function controlarTipo(e){
+        setTipo(e.target.value);
     }
 
-    render(){
-        return(
+    return(
             <>
             
-                <form className="form" onSubmit={(e) => this.evitarSubmit(e)}>
-                    <select onChange={(e) => this.controlarTipo(e)} value={this.state.tipo}>
+                <form className="form" onSubmit={(e) => evitarSubmit(e)}>
+                    <select onChange={(e) => controlarTipo(e)} value={tipo}>
                         <option value="movie">Peliculas</option>
                         <option value="tv">Series</option>                    
                     </select>
-                    <input type="text" onChange={(e) => this.controlarCambios(e)} value={this.state.busqueda} placeholder="Buscar películas..."/>
+                    <input type="text" onChange={(e) => controlarCambios(e)} value={busqueda} placeholder="Buscar películas..."/>
                     <button type="submit">Buscar</button>
                 </form>
             </>
         )
     }
-}   
-export default withRouter(Search)
+export default withRouter(Search);

@@ -1,25 +1,18 @@
-import {Component} from 'react';
 import "./CrearCuenta.css";
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
+import {useState} from "react";
 
-class CrearCuenta extends Component{
-    constructor(props){
-        super(props)
-        this.state = {
-            email: "",
-            password: "",
-            error: ""
-        };
-    }
+function CrearCuenta(props) {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState = ("");
 
-    enviarFormulario(event) {
+    function enviarFormulario(event) {
         event.preventDefault();
         
-        if (this.state.password.length < 6) {
-            this.setState({
-                error: "La contraseña debe tener mínimo 6 caracteres"
-            });
+        if (password.length < 6) {
+            setError("La contraseña debe tener mínimo 6 caracteres")
             return;
         }
 
@@ -31,79 +24,68 @@ class CrearCuenta extends Component{
 
         let mailExistente = false;
         for (let i=0; i < emails.length; i++){
-            if (emails[i] === this.state.email) {
+            if (emails[i] === email) {
                 mailExistente=true;
             }
         }
 
         if (mailExistente) {
-            this.setState ({ 
-                error : "El email ya está registrado"
-            });
+            setError("El email ya está registrado");
             return;
         }
 
         let usuarioNuevo = {
-            email : this.state.email,
-            password : this.state.password
+            email : email,
+            password : password
         };
         usuarios.push(usuarioNuevo);
 
         localStorage.setItem("usuarios",JSON.stringify(usuarios));
 
-        this.setState({
-            email : "",
-            password:"",
-            error : ""
-        });
+        setEmail("");
+        setPassword("");
+        setError("");
 
-        this.props.history.push("/login")
+        props.history.push("/login")
     }
 
-        controlarMail(event){
-            this.setState({
-                email : event.target.value,
-                error : ""
-            })
-        }
+    function controlarMail(event){
+        setEmail(event.target.value);
+        setError("");
+    }
 
-        controlarContraseña(event){
-            this.setState({
-                password : event.target.value,
-                error: ""
-            })
-        }
+    function controlarContraseña(event){
+        setPassword(event.target.value);
+        setError("");
+    }
 
-        render(){
-            return(
-                <>
-                <Header/>
-                <div className="crearcuenta-container">
-                <div className="crearcuenta-box">
+    return(
+        <>
+            <Header/>
+            <div className="crearcuenta-container">
+            <div className="crearcuenta-box">
                 <h2 className="crearcuenta-title">Crear cuenta</h2>
-                <form className="crearcuenta-form" onSubmit={(event)=> this.enviarFormulario(event)}>
+                <form className="crearcuenta-form" onSubmit={(event)=> enviarFormulario(event)}>
                     <label>Email:</label>
                     <input 
                       type="email"  
-                      value={this.state.email} 
-                      onChange={(event) => this.controlarMail(event)}/>
+                      value={email} 
+                      onChange={(event) => controlarMail(event)}/>
                     <label>Password:</label>
                     <input 
                       type="password" 
-                      value={this.state.password} 
-                      onChange={(event) => this.controlarContraseña(event)}/>
+                      value={password} 
+                      onChange={(event) => controlarContraseña(event)}/>
                     <button type="submit">Crear cuenta</button>
-                    {this.state.error !== "" ? <p className="mensaje-error">{this.state.error}</p> : ""}
+                    {error !== "" ? <p className="mensaje-error">{error}</p> : ""}
                 </form>
                 </div>
                 </div>
                 <Footer/>
                 </>
-            );
-        }
+    );
+}
 
-    
-}    
 
 export default CrearCuenta;
 
